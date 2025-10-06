@@ -12,6 +12,8 @@ import { InputField } from "../components/InputField";
 import { NavigationButton } from "../components/NavigationButton";
 import { useCVContext } from "../context/CVContext";
 import { Education } from "../types/cv.types";
+import { EducationSchema } from "../types/cv.types";
+
 
 export default function EducationScreen() {
   const router = useRouter();
@@ -25,28 +27,28 @@ export default function EducationScreen() {
   });
 
   const handleAdd = () => {
-    if (!formData.institution || !formData.degree) {
-      Alert.alert("Error", "Por favor completa al menos institución y título");
-      return;
-    }
+  if (!formData.institution || !formData.degree) {
+    Alert.alert("Error", "Por favor completa al menos institución y título");
+    return;
+  }
 
-    const newEducation: Education = {
-      id: Date.now().toString(),
-      ...formData,
-    };
-
-    addEducation(newEducation);
-
-    // Limpiar formulario
-    setFormData({
-      institution: "",
-      degree: "",
-      field: "",
-      graduationYear: "",
-    });
-
-    Alert.alert("Éxito", "Educación agregada correctamente");
+  const newEducation: Education = {
+    id: Date.now().toString(),
+    ...formData,
   };
+
+  addEducation(newEducation);
+
+  // Limpiar formulario
+  setFormData({
+    institution: "",
+    degree: "",
+    field: "",
+    graduationYear: "",
+  });
+
+  Alert.alert("Éxito", "Educación agregada correctamente");
+};
 
   const handleDelete = (id: string) => {
     Alert.alert("Confirmar", "¿Estás seguro de eliminar esta educación?", [
@@ -202,4 +204,3 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
-
